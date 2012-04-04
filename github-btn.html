@@ -148,6 +148,9 @@ body {
       counter.innerHTML = addCommas(obj.data.forks);
     } else if (type == 'follow') {
       counter.innerHTML = addCommas(obj.data.followers);
+    } else if (type == 'public_repos') {
+    console.log(obj.data);
+      counter.innerHTML = addCommas(obj.data.public_repos);
     }
 
     // Show the count if asked
@@ -173,6 +176,11 @@ body {
     text.innerHTML = 'Follow @' + user;
     button.href = 'https://github.com/' + user;
     counter.href = 'https://github.com/' + user + '/followers';
+  } else if (type == 'public_repos') { 
+    mainButton.className += ' github-me';
+    text.innerHTML = 'Repos';
+    button.href = 'https://github.com/' + user;
+    counter.href = 'https://github.com/' + user;
   }
 
   // Change the size
@@ -180,7 +188,7 @@ body {
     mainButton.className += ' github-btn-large';
   }
 
-  if (type == 'follow') {
+  if (type == 'follow' || type == 'public_repos') {
     jsonp('https://api.github.com/users/' + user);
   } else {
     jsonp('https://api.github.com/repos/' + user + '/' + repo);
